@@ -33,7 +33,7 @@ module.exports.run = async (bot, message, args) => {
   message.channel.send(`${message.author} has given ${pUser} ${args[1]} coins.`);
 
   fs.writeFile("./coins.json", JSON.stringify(coins), (err) => {
-    if(err) cosole.log(err)
+    if(err) console.log(err)
   });
 
 
