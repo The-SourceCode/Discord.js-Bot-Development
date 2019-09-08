@@ -7,7 +7,7 @@ const bot = new Discord.Client({disableEveryone: true});
 bot.on("ready", async () => {
   console.log(`${bot.user.username} is online!`);
 
-  bot.user.setActivity("tutorials on TSC", {type: "WATCHING"});
+  bot.user.setActivity("tutorials for discord bot", {type: "WATCHING"});
 
   //bot.user.setGame("on SourceCade!");
 });
