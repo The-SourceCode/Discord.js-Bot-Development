@@ -51,13 +51,13 @@ module.exports = {
         }
 
         // Check if the user's banable
-        if (!toBan.banable) {
+        if (!toBan.bannable) {
             return message.reply("I can't ban that person due to role hierarchy, I suppose.")
                 .then(m => m.delete(5000));
         }
         
         const embed = new RichEmbed()
-            .setColor(this.client.color)
+            .setColor("#ff0000")
             .setThumbnail(toBan.user.displayAvatarURL)
             .setFooter(message.member.displayName, message.author.displayAvatarURL)
             .setTimestamp()
