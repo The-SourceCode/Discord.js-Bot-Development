@@ -57,7 +57,7 @@ module.exports = {
         }
                 
         const embed = new RichEmbed()
-            .setColor(this.client.color)
+            .setColor("#ff0000")
             .setThumbnail(toKick.user.displayAvatarURL)
             .setFooter(message.member.displayName, message.author.displayAvatarURL)
             .setTimestamp()
