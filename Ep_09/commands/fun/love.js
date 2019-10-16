@@ -1,57 +1,38 @@
 const { RichEmbed } = require("discord.js");
-const { stripIndents } = require("common-tags");
+const { getMember } = require("../../functions.js");
 
 module.exports = {
-    name: "help",
-    aliases: ["h"],
-    category: "info",
-    description: "Returns all commands, or one specific command info",
-    usage: "[command | alias]",
+    name: "love",
+    aliases: ["affinity"],
+    category: "fun",
+    description: "Calculates the love affinity you have for another person.",
+    usage: "[mention | id | username]",
     run: async (client, message, args) => {
-        if (args[0]) {
-            return getCMD(client, message, args[0]);
-        } else {
-            return getAll(client, message);
+        // Get a member from mention, id, or username
+        let person = getMember(message, args[0]);
+
+        // If no person is found
+        // It's going to default to the author
+        // And we don't want to love ourself in this command
+        // So we filter out our ID from the server members
+        // And get a random person from that collection
+        if (!person || message.author.id === person.id) {
+            person = message.guild.members
+                .filter(m => m.id !== message.author.id)
+                .random();
         }
+
+        // love is the percentage
+        // loveIndex is a number from 0 to 10, based on that love variable
+        const love = Math.random() * 100;
+        const loveIndex = Math.floor(love / 10);
+        const loveLevel = "💖".repeat(loveIndex) + "💔".repeat(10 - loveIndex);
+
+        const embed = new RichEmbed()
+            .setColor("#ffb6c1")
+            .addField(`☁ **${person.displayName}** loves **${message.member.displayName}** this much:`,
+            `💟 ${Math.floor(love)}%\n\n${loveLevel}`);
+
+        message.channel.send(embed);
     }
-}
-
-function getAll(client, message) {
-    const embed = new RichEmbed()
-        .setColor("RANDOM")
-
-    const commands = (category) => {
-        return client.commands
-            .filter(cmd => cmd.category === category)
-            .map(cmd => `- \`${cmd.name}\``)
-            .join("\n");
-    }
-
-    const info = client.categories
-        .map(cat => stripIndents`**${cat[0].toUpperCase() + cat.slice(1)}** \n${commands(cat)}`)
-        .reduce((string, category) => string + "\n" + category);
-
-    return message.channel.send(embed.setDescription(info));
-}
-
-function getCMD(client, message, input) {
-    const embed = new RichEmbed()
-
-    const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));
-    
-    let info = `No information found for command **${input.toLowerCase()}**`;
-
-    if (!cmd) {
-        return message.channel.send(embed.setColor("RED").setDescription(info));
-    }
-
-    if (cmd.name) info = `**Command name**: ${cmd.name}`;
-    if (cmd.aliases) info += `\n**Aliases**: ${cmd.aliases.map(a => `\`${a}\``).join(", ")}`;
-    if (cmd.description) info += `\n**Description**: ${cmd.description}`;
-    if (cmd.usage) {
-        info += `\n**Usage**: ${cmd.usage}`;
-        embed.setFooter(`Syntax: <> = required, [] = optional`);
-    }
-
-    return message.channel.send(embed.setColor("GREEN").setDescription(info));
 }
