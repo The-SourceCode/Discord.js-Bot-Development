@@ -22,7 +22,7 @@ module.exports = {
         let res; 
 
         try {
-            await fetch(url).then(url => url.json());
+            res = await fetch(url).then(url => url.json());
         } catch (e) {
             return message.reply("I couldn't find that account... :(")
                 .then(m => m.delete(5000));
