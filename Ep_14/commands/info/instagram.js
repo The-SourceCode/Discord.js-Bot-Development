@@ -18,9 +18,12 @@ module.exports = {
         }
 
         const url = `https://instagram.com/${name}/?__a=1`;
-        const res = await fetch(url).then(url => url.json());
+        
+        let res; 
 
-        if (!res.graphql.user.username) {
+        try {
+            await fetch(url).then(url => url.json());
+        } catch (e) {
             return message.reply("I couldn't find that account... :(")
                 .then(m => m.delete(5000));
         }
