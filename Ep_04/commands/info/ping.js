@@ -5,7 +5,8 @@ module.exports = {
         const msg = await message.channel.send(`🏓 Pinging....`);
 
         msg.edit(`🏓 Pong!
-        Latency is ${Math.floor(msg.createdTimestap - message.createdTimestap)}ms
+        Latency is ${Math.floor(msg.createdTimestamp - message.createdTimestamp)}ms
+        // change Timestap to TimeStamp
         API Latency is ${Math.round(client.ping)}ms`);
     }
 }
