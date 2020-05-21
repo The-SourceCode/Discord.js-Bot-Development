@@ -1,4 +1,4 @@
-const { Client, RichEmbed } = require("discord.js");
+const { Client, MessageEmbed } = require("discord.js");
 const { config } = require("dotenv");
 
 const client = new Client({
@@ -60,7 +60,7 @@ client.on("message", async message => {
         // If the first argument is embed, send an embed,
         // otherwise, send a normal message
         if (args[0].toLowerCase() === "embed") {
-            const embed = new RichEmbed()
+            const embed = new MessageEmbed()
                 .setDescription(args.slice(1).join(" "))
                 .setColor(roleColor === "#000000" ? "#ffffff" :  roleColorv)
                 .setTimestamp()
