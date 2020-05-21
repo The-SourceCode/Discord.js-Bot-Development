@@ -1,4 +1,4 @@
-const { RichEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const { stripIndents } = require("common-tags");
 
 const fetch = require("node-fetch");
@@ -30,7 +30,7 @@ module.exports = {
 
         const account = res.graphql.user;
 
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
             .setColor("RANDOM")
             .setTitle(account.full_name)
             .setURL(`https://instagram.com/${name}`)

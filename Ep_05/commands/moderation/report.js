@@ -1,4 +1,4 @@
-const { RichEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const { stripIndents } = require("common-tags");
 
 module.exports = {
@@ -31,7 +31,7 @@ module.exports = {
         if (!channel)
             return message.channel.send("Couldn't find a `#reports` channel").then(m => m.delete(5000));
 
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
             .setColor("#ff0000")
             .setTimestamp()
             .setFooter(message.guild.name, message.guild.iconURL)

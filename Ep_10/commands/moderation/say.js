@@ -1,4 +1,4 @@
-const { RichEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 
 module.exports = {
     name: "say",
@@ -17,7 +17,7 @@ module.exports = {
         const roleColor = message.guild.me.highestRole.hexColor;
 
         if (args[0].toLowerCase() === "embed") {
-            const embed = new RichEmbed()
+            const embed = new MessageEmbed()
                 .setDescription(args.slice(1).join(" "))
                 .setColor(roleColor === "#000000" ? "#ffffff" : roleColor);
 

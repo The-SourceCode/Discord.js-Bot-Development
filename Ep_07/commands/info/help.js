@@ -1,4 +1,4 @@
-const { RichEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const { stripIndents } = require("common-tags");
 
 module.exports = {
@@ -22,7 +22,7 @@ module.exports = {
 }
 
 function getAll(client, message) {
-    const embed = new RichEmbed()
+    const embed = new MessageEmbed()
         .setColor("RANDOM")
         
     // Map all the commands
@@ -43,7 +43,7 @@ function getAll(client, message) {
 }
 
 function getCMD(client, message, input) {
-    const embed = new RichEmbed()
+    const embed = new MessageEmbed()
 
     // Get the cmd by the name or alias
     const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));
