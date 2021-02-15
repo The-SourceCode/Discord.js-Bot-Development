@@ -1,4 +1,4 @@
-const { RichEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const { stripIndents } = require("common-tags");
 
 const Client = require("fortnite");
@@ -15,7 +15,7 @@ module.exports = {
         if (args[0].toLowerCase() === "store") {
             const store = await ft.store();
 
-            const embed = new RichEmbed()
+            const embed = new MessageEmbed()
                 .setColor("#9d4dbb")
                 .setFooter("Fortnite store", message.author.displayAvatarURL)
                 .setTimestamp();
@@ -56,11 +56,11 @@ module.exports = {
             const duo = search.stats.duo;
             const squad = search.stats.squad;
 
-            const embed = new RichEmbed()
+            const embed = new MessageEmbed()
                 .setTitle(`${search.username} (${search.platform})`)
                 .setURL(search.url)
                 .setColor("#9d4dbb")
-                .setFooter(`Fortnite stats`, message.author.displayAvatarURL)
+                .setFooter(`Fortnite stats`, message.author.displayAvatarURL())
                 .setTimestamp()
                 .addField("Solo:", stripIndents`**- Wins:** ${solo.wins}
                 **- KD:** ${solo.kd}

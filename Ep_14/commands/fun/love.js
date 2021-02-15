@@ -1,4 +1,4 @@
-const { RichEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const { getMember } = require("../../functions.js");
 
 module.exports = {
@@ -21,7 +21,7 @@ module.exports = {
         const loveIndex = Math.floor(love / 10);
         const loveLevel = "💖".repeat(loveIndex) + "💔".repeat(10 - loveIndex);
 
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
             .setColor("#ffb6c1")
             .addField(`☁ **${person.displayName}** loves **${message.member.displayName}** this much:`,
             `💟 ${Math.floor(love)}%\n\n${loveLevel}`);
