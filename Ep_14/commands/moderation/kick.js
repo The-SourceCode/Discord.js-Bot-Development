@@ -1,4 +1,4 @@
-const { RichEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const { stripIndents } = require("common-tags");
 const { promptMessage } = require("../../functions.js");
 
@@ -8,7 +8,7 @@ module.exports = {
     description: "Kicks the member",
     usage: "<id | mention>",
     run: async (client, message, args) => {
-        const logChannel = message.guild.channels.find(c => c.name === "logs") || message.channel;
+        const logChannel = message.guild.channels.cache.find(c => c.name === "logs") || message.channel;
 
         if (message.deletable) message.delete();
 
@@ -36,7 +36,7 @@ module.exports = {
                 .then(m => m.delete(5000));
         }
 
-        const toKick = message.mentions.members.first() || message.guild.members.get(args[0]);
+        const toKick = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
 
         // No member found
         if (!toKick) {
@@ -56,16 +56,16 @@ module.exports = {
                 .then(m => m.delete(5000));
         }
                 
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
             .setColor("#ff0000")
-            .setThumbnail(toKick.user.displayAvatarURL)
-            .setFooter(message.member.displayName, message.author.displayAvatarURL)
+            .setThumbnail(toKick.user.displayAvatarURL())
+            .setFooter(message.member.displayName, message.author.displayAvatarURL())
             .setTimestamp()
             .setDescription(stripIndents`**- Kicked member:** ${toKick} (${toKick.id})
             **- Kicked by:** ${message.member} (${message.member.id})
             **- Reason:** ${args.slice(1).join(" ")}`);
 
-        const promptEmbed = new RichEmbed()
+        const promptEmbed = new MessageEmbed()
             .setColor("GREEN")
             .setAuthor(`This verification becomes invalid after 30s.`)
             .setDescription(`Do you want to kick ${toKick}?`)
