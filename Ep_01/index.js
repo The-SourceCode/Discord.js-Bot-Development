@@ -1,15 +1,11 @@
 const { Client } = require("discord.js");
-const { config } = require("dotenv");
+require('dotenv').config();
 
 // Declares our bot,
 // the disableEveryone prevents the client to ping @everyone
 const client = new Client({
     disableEveryone: true
 });
-
-config({
-    path: __dirname + "/.env"
-})
 
 // When the bot's online, what's in these brackets will be executed
 client.on("ready", () => {
